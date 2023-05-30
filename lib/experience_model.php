@@ -8,6 +8,7 @@ class Experience {
     private $db_table = 'experiences';
     public $id;
     public $title;
+    public $type;
     public $company;
     public $location;
     public $start_date;
@@ -20,10 +21,11 @@ class Experience {
 
 
     public function create() {
-        $sql = "INSERT INTO " . $this->db_table . " (title, company, location, start_date, end_date, description) VALUES (:title, :company, :location, :start_date, :end_date, :description)";
+        $sql = "INSERT INTO " . $this->db_table . " (title, type, company, location, start_date, end_date, description) VALUES (:title, :type, :company, :location, :start_date, :end_date, :description)";
 
         $stmt = $this->db_connection->prepare($sql);
         $stmt->bindParam(':title', $this->title);
+        $stmt->bindParam(':type', $this->type);
         $stmt->bindParam(':company', $this->company);
         $stmt->bindParam(':location', $this->location);
         $stmt->bindParam(':start_date', $this->start_date);
