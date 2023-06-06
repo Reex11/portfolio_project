@@ -8,3 +8,5 @@
         <p>Developed By Abdulmalik Almushaiqah - 2023</p> 
     </div>
 </footer>
+</body>
+</html>

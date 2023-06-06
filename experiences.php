@@ -8,7 +8,6 @@ stopIfDBNotPresent();
 
 require_once PROJECT_HOME . '/lib/session_manager.php';
 
-view('homepage');
-
+view('experiences');
 
 

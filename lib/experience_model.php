@@ -1,11 +1,9 @@
 <?php 
 
-require_once 'database.php';
-
 class Experience {
 
+    const TABLENAME = 'experiences';
     private $db_connection;
-    private $db_table = 'experiences';
     public $id;
     public $title;
     public $type;
@@ -19,9 +17,17 @@ class Experience {
         $this->db_connection = Database::getConnection();
     }
 
+    public static function all() {
+        $sql = "SELECT * FROM " . self::TABLENAME;
+        $stmt = Database::getConnection()->prepare($sql);
+        $stmt->execute();
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 
     public function create() {
-        $sql = "INSERT INTO " . $this->db_table . " (title, type, company, location, start_date, end_date, description) VALUES (:title, :type, :company, :location, :start_date, :end_date, :description)";
+        $sql = "INSERT INTO " . self::TABLENAME . " (title, type, company, location, start_date, end_date, description) VALUES (:title, :type, :company, :location, :start_date, :end_date, :description)";
 
         $stmt = $this->db_connection->prepare($sql);
         $stmt->bindParam(':title', $this->title);
@@ -38,8 +44,8 @@ class Experience {
 
     public function getById($id) {
 
-        $sql = "SELECT * FROM " . $this->db_table . " WHERE id = :id";
-        $stmt = $this->db_connection->prepare($sql);
+        $sql = "SELECT * FROM " . self::TABLENAME . " WHERE id = :id";
+        $stmt = Database::getConnection()->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
 

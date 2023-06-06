@@ -8,7 +8,8 @@ stopIfDBNotPresent();
 
 require_once PROJECT_HOME . '/lib/session_manager.php';
 
-view('homepage');
 
+SessionManager::logout();
 
-
+header('Location: login.php');
+?>
